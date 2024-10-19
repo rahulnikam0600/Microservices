@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.micro.question_service.model.Question;
 import com.micro.question_service.model.QuestionWrapper;
+import com.micro.question_service.model.Response;
 import com.micro.question_service.service.QuestionService;
 
 @RestController
@@ -58,4 +59,11 @@ public class QuestionController {
 	}
 	
 	//Method to calculate score
+	
+	@PostMapping("score")
+	public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
+		
+		return questionService.calculateScore(responses);
+		
+	}
 }

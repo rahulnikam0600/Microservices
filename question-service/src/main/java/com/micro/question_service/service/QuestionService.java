@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.micro.question_service.dao.QuestionDao;
 import com.micro.question_service.model.Question;
 import com.micro.question_service.model.QuestionWrapper;
+import com.micro.question_service.model.Response;
 
 
 @Service
@@ -84,5 +85,19 @@ public class QuestionService {
 		
 		return new ResponseEntity<List<QuestionWrapper>>(questionsForUser,HttpStatus.OK);
 		
+	}
+
+
+	public ResponseEntity<Integer> calculateScore(List<Response> responses) {
+
+		Integer score = 0;
+		
+		for(Response res: responses) {
+			String correctAnswer = questionDao.findById(res.getId()).get().getCorrectAnswer();
+			if(res.getResponse().equals(correctAnswer)) {
+				score++;
+			}
+		}
+		return new ResponseEntity<Integer>(score,HttpStatus.OK);
 	}
 }
