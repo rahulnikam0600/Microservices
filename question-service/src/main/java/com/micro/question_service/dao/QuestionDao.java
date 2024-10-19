@@ -15,8 +15,8 @@ import com.micro.question_service.model.Question;
 @Repository
 public interface QuestionDao extends JpaRepository<Question, Integer>{
 
-	@Query(value = "SELECT * FROM quizquestions q WHERE q.category = :category ORDER BY RAND()", nativeQuery = true)
-	public List<Question> findRandomQuestionByCategory( @Param("category") String category, Pageable pageable);
+	@Query(value = "SELECT q.id FROM quizquestions q WHERE q.category = :category ORDER BY RAND()", nativeQuery = true)
+	public List<Integer> findRandomQuestionByCategory( @Param("category") String category, Pageable pageable);
 
 	public List<Question> findByCategory(String cat);
 

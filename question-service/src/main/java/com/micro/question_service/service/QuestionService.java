@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -45,5 +47,16 @@ public class QuestionService {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+	}
+
+
+	public ResponseEntity<List<Integer>> getRandomQuestions(String category, Integer numOfQuestions) {
+		// TODO Auto-generated method stub
+		
+		Pageable pageable = PageRequest.of(0, numOfQuestions);
+		
+		List<Integer> questinoids = questionDao.findRandomQuestionByCategory(category, pageable);
+		
+		return new ResponseEntity<List<Integer>>(questinoids,HttpStatus.OK);
 	}
 }

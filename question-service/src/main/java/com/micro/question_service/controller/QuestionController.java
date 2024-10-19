@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.micro.question_service.model.Question;
@@ -37,4 +38,16 @@ public class QuestionController {
 	public ResponseEntity<String> addQuestion(@RequestBody Question question) {
 		return questionService.addQuestion(question);
 	}
+	
+	//Method to generate QuizQuestions, This method will provide the question id's only
+	@GetMapping("generate")
+	public ResponseEntity<List<Integer>> getQuestionsForQuiz(
+			@RequestParam String category, @RequestParam Integer numOfQuestions){
+				
+		
+		return questionService.getRandomQuestions(category,numOfQuestions);
+		
+	}
+	//Method to get questions using list of question id's
+	//Method to calculate score
 }
