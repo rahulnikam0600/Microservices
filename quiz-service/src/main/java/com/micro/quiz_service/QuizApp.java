@@ -2,12 +2,14 @@ package com.micro.quiz_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-public class QuizServiceApplication {
+@EnableFeignClients
+public class QuizApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuizServiceApplication.class, args);
+		SpringApplication.run(QuizApp.class, args);
 	}
 
 }
